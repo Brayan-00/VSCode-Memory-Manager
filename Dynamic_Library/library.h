@@ -1,0 +1,6 @@
+#ifndef DYNAMIC_LIBRARY_LIBRARY_H
+#define DYNAMIC_LIBRARY_LIBRARY_H
+
+void hello();
+
+#endif //DYNAMIC_LIBRARY_LIBRARY_H
