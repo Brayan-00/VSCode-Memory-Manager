@@ -10,15 +10,21 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:heapvisualizer.helloWorld"
+		"onCommand:heapvisualizer.helloWorld",
+		"onCommand:heapvisualizer.memoryManagment"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "heapvisualizer.helloWorld",
-				"title": "Hello World"
-			}
+				"title": "Comando numero uno"
+			},		
+			{
+				"command": "heapvisualizer.memoryManagment",
+				"title": "Memory Management",
+				"category": "Interface"
+			  }
 		]
 	},
 	"scripts": {

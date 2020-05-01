@@ -17,11 +17,69 @@ export function activate(context: vscode.ExtensionContext) {
 		// The code you place here will be executed every time your command is executed
 
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from HeapVisualizer!');
+		vscode.window.showInformationMessage('Hello que pedo');
 	});
+
+	context.subscriptions.push(
+		vscode.commands.registerCommand('heapvisualizer.memoryManagment', () => {
+		  // Create and show a new webview
+		  const panel = vscode.window.createWebviewPanel(
+			'memoryManagment', // Identifies the type of the webview. Used internally
+			'Memory managment', // Title of the panel displayed to the user
+			vscode.ViewColumn.One, // Editor column to show the new webview panel in.
+			{} // Webview options. More on these later.
+		  );
+
+		  panel.webview.html = getWebviewContent();
+
+		})
+	  );
 
 	context.subscriptions.push(disposable);
 }
 
+function getWebviewContent() {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory managment</title>
+</head>
+<body>
+<h2>Basic HTML Table</h2>
+
+<table style="width:100%">
+  <tr>
+    <th>Firstname</th>
+    <th>Lastname</th> 
+    <th>Age</th>
+  </tr>
+  <tr>
+    <td>Jill</td>
+    <td>Smith</td>
+    <td>50</td>
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+</body>
+</html>`;
+}
+
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() {
+
+
+	console.log('Congratulations, your extension "heapvisualizer" is now deactivate!');
+
+
+}
