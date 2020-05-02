@@ -5,7 +5,8 @@
 #include "iostream"
 
 int main(){
-    VSPtr<int> a = VSPtr<int>(new int());
+    VSPtr<int> a = VSPtr<int>::New();
     *a = 10;
+
     std::cout << *a <<endl;
 }

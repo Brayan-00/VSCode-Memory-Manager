@@ -1,0 +1,12 @@
+Descripción
+    Se creará una extensión para el editor Visual Studio Code que permita visualizar el heap
+    con la memoria almacenada al utilizar una librería que implementará el uso de smartpointers
+    y está será una biblioteca dinámica. Esta extensión solo fucionará como interfaz.
+
+
+
+Historias de usuario
+
+    Se debe crear una biblioteca que permita la creación un nuevo tipo de dato
+    Este dato será denominado VSPtr<T>, tiene al menos un atributo T*
+        Se instanciará: VSPtr<int> myPtr = VSPtr<int>::New();

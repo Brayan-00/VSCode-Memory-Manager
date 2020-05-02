@@ -1,31 +1,26 @@
 #ifndef SMART_POINTERSTEST_LIBRARY_H
 #define SMART_POINTERSTEST_LIBRARY_H
 #include <iostream>
+#include <typeinfo>
 using namespace std;
 
 template<typename T>
 class VSPtr{
 private:
-    T* ptr_data;
+    static T* ptr_data;
+    int id;
 public:
     //Constructor
-    VSPtr(T* p = NULL){
-        ptr_data = p;
-    }
+    VSPtr(T* p = NULL);
     //Destructor
-    ~VSPtr(){
-        delete(ptr_data);
-    }
+    ~VSPtr();
+    T& operator*();
+    T* operator->();
+    T& operator=(const T& other);
+    static T New();
 
-    T& operator*(){
-        return *ptr_data;
-    }
-
-    T* operator->(){
-        return ptr_data;
-    }
-    // Sin inicializar, no sobreescribe la inicializacion del puntero
-    static void New();
 };
+
+
 
 #endif //SMART_POINTERSTEST_LIBRARY_H
