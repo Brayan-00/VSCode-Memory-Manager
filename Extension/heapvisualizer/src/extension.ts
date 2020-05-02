@@ -27,7 +27,11 @@ export function activate(context: vscode.ExtensionContext) {
 			'memoryManagment', // Identifies the type of the webview. Used internally
 			'Memory managment', // Title of the panel displayed to the user
 			vscode.ViewColumn.One, // Editor column to show the new webview panel in.
-			{} // Webview options. More on these later.
+			{
+
+				enableScripts: true
+
+			} // Webview options. More on these later.
 		  );
 
 		  panel.webview.html = getWebviewContent();
@@ -41,45 +45,49 @@ export function activate(context: vscode.ExtensionContext) {
 function getWebviewContent() {
   return `<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Memory managment</title>
-</head>
-<body>
-<h2>Basic HTML Table</h2>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Memory managment</title>
 
-<table style="width:100%">
-  <tr>
-    <th>Firstname</th>
-    <th>Lastname</th> 
-    <th>Age</th>
-  </tr>
-  <tr>
-    <td>Jill</td>
-    <td>Smith</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>80</td>
-  </tr>
-</table>
-</body>
+		<style>
+		table, th, td {
+			border: 1px solid black;
+			text-align: left;
+		}
+		table#t01 {
+			width: 100%;    
+			background-color: #ffffff;
+			color: black;
+		}
+		</style>
+	</head>
+
+	<body>
+
+		<h2>Memory managment table</h2>
+
+		<input type="button" value="Add" onclick="myFunction();"/>
+
+		<table id="t01">
+		<tr>
+			<th>Data type</th>
+			<th>Data value</th> 
+			<th>Memory location</th>
+			<th>References in GC</th>
+		</tr>
+		</table>
+
+		<script src="scriptMemoryManagment.js"></script>
+
+	</body>
+
 </html>`;
 }
 
 // this method is called when your extension is deactivated
 export function deactivate() {
 
-
 	console.log('Congratulations, your extension "heapvisualizer" is now deactivate!');
-
 
 }
