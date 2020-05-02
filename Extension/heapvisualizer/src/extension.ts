@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import * as path from 'path';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -74,11 +75,30 @@ function getWebviewContent() {
 			<th>Data type</th>
 			<th>Data value</th> 
 			<th>Memory location</th>
-			<th>References in GC</th>
+			<th># references in GC</th>
 		</tr>
 		</table>
 
-		<script src="scriptMemoryManagment.js"></script>
+		<script>
+			
+
+
+			function myFunction(){ 
+
+				var tb1 = document.getElementById("t01");
+				var row = tb1.insertRow();
+				var cell1 = row.insertCell();
+				var cell2 = row.insertCell();
+				var cell3 = row.insertCell();
+				var cell4 = row.insertCell();
+				cell1.innerHTML = "123";
+				cell2.innerHTML = "123";
+				cell3.innerHTML = "123";	
+				cell4.innerHTML = "123";
+			
+			}
+
+		</script>
 
 	</body>
 
