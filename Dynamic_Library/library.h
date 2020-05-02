@@ -1,10 +1,31 @@
-#ifndef DYNAMIC_LIBRARY_LIBRARY_H
-#define DYNAMIC_LIBRARY_LIBRARY_H
-
+#ifndef SMART_POINTERSTEST_LIBRARY_H
+#define SMART_POINTERSTEST_LIBRARY_H
 #include <iostream>
+using namespace std;
 
-void hello(){
-    std::cout << "Hello, World!" << std::endl;
-}
+template<typename T>
+class VSPtr{
+private:
+    T* ptr_data;
+public:
+    //Constructor
+    VSPtr(T* p = NULL){
+        ptr_data = p;
+    }
+    //Destructor
+    ~VSPtr(){
+        delete(ptr_data);
+    }
 
-#endif //DYNAMIC_LIBRARY_LIBRARY_H
+    T& operator*(){
+        return *ptr_data;
+    }
+
+    T* operator->(){
+        return ptr_data;
+    }
+    // Sin inicializar, no sobreescribe la inicializacion del puntero
+    static void New();
+};
+
+#endif //SMART_POINTERSTEST_LIBRARY_H
