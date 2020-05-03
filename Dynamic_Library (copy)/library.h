@@ -1,66 +1,24 @@
-#ifndef SMART_POINTERSTEST_LIBRARY_H
-#define SMART_POINTERSTEST_LIBRARY_H
 #include <iostream>
-#include <typeinfo>
-#include <string>
-#include "garbageCollector.h"
 using namespace std;
 
-template<typename T>
-class VSPtr{
-private:
-
+// A generic smart pointer class 
+template <class T>
+class SmartPtr {
+    T* ptr; // Actual pointer
 public:
+    // Constructor
+    explicit SmartPtr(T* p = NULL) { ptr = p; }
 
-    static garbageCollector* gc;
-    T* ptr = nullptr;
-    string id;
-    string type;
+    // Destructor
+    ~SmartPtr() { delete (ptr); }
 
-    //Constructor
-    //VSPtr(T* p = NULL);
-    //Destructor
-    //~VSPtr();
+    // Overloading dereferncing operator
+    T& operator*() { return *ptr; }
 
-
-    static VSPtr<T> New(){
-
-        VSPtr<T> newPtr;
-        cout << "Created VSPtr: " << &newPtr.ptr << endl;
-        newPtr.type = typeid(*newPtr.ptr).name();
-        //newPtr.id = gc->counter;
-        //gc->increaseCounter();
-
-        return newPtr;
-
-    }
-
-    T& operator * () const { return *ptr;}
-
-
-    T * operator -> (){ return ptr;}
-
-    T operator & (){ return *ptr;}
-
-    VSPtr& operator =(T newValue){
-
-        ptr = new T(newValue);
-        type = typeid(*ptr).name();
-    }
-
-    VSPtr& operator =(VSPtr& other){
-
-        ptr = other.ptr;
-        id = other.id;
-        return *this;
-
-    }
-
-
-
-
+    // Overloading arrow operator so that
+    // members of T can be accessed
+    // like a pointer (useful if T represents
+    // a class or struct or union type)
+    T* operator->() { return ptr; }
 };
 
-
-
-#endif //SMART_POINTERSTEST_LIBRARY_H

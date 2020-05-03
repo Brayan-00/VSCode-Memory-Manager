@@ -6,8 +6,8 @@
 
 int main()
 {
-    VSPtr<int> a = VSPtr<int>::New();
-
-
+    SmartPtr<int> ptr(new int());
+    *ptr = 20;
+    cout << *ptr;
     return 0;
 }
