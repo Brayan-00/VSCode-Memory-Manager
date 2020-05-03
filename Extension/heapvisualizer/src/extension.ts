@@ -80,8 +80,6 @@ function getWebviewContent() {
 		</table>
 
 		<script>
-			
-
 
 			function myFunction(){ 
 

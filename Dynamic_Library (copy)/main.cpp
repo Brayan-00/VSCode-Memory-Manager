@@ -4,9 +4,10 @@
 #include "library.h"
 #include "iostream"
 
-int main(){
-    VSPtr<int> * a = VSPtr<int>::New();
-    *a = 10;
+int main()
+{
+    VSPtr<int> a = VSPtr<int>::New();
 
-    std::cout << *a <<endl;
+
+    return 0;
 }
