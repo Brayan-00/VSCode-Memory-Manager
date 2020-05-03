@@ -18,12 +18,14 @@ public:
     // Constructor
     explicit SmartPtr(T* p = NULL) {
         ptr = p;
-        gc->adressList->push_back(reinterpret_cast<void**>(&ptr));
+        garbageElement *g = new garbageElement(reinterpret_cast<void**>(&ptr));
+        gc->addressList->push_back(g);
         cout << "Se ha creado el nuevo VSPointer, &ptr = " << &ptr << endl;
         cout << "Su valor inicial es, *ptr = "<< *ptr << endl;
-        cout << "Se ha agregado la direccion de memoria en el GC: "<< gc->adressList->at(0) << endl;
-        free(reinterpret_cast<void**>(&gc->adressList->at(0)));
-        cout << "Se ha limpiado la direccion de memoria en el GC: "<< gc->adressList->at(0) << endl;
+        cout << "Se ha agregado la direccion de memoria en el GC: "<< gc->addressList->at(0)->address << endl;
+        //free(reinterpret_cast<void**>(&gc->addressList->at(0)->address));
+        //free(ptr);
+        //cout << "Se ha limpiado la direccion de memoria en el GC: "<< gc->addressList->at(0)->address << endl;
     }
 
     // Destructor

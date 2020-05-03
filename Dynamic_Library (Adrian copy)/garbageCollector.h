@@ -2,6 +2,7 @@
 #define DYNAMIC_LIBRARY_GARBAGECOLLECTOR_H
 
 #include <vector>
+#include "garbageElement.h"
 
 using namespace std;
 
@@ -19,7 +20,10 @@ class garbageCollector {
 
     public:
 
-        vector<void**> * adressList = new vector<void**>;
+        //vector<void**> * adressList = new vector<void**>;
+
+        vector<garbageElement*> * addressList = new vector<garbageElement*>;
+
         /* Static access method. */
         static int counter;
 
