@@ -9,8 +9,7 @@ int main()
     SmartPtr<int> ptr(new int());
     *ptr = 20;
 
-    cout << "&ptr = " << &ptr << endl;
-    cout << "*ptr = "<< *ptr << endl;
+
 
     return 0;
 }

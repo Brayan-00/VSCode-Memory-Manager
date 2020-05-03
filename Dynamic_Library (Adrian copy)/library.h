@@ -19,14 +19,20 @@ public:
     explicit SmartPtr(T* p = NULL) {
         ptr = p;
         gc->adressList->push_back(reinterpret_cast<void**>(&ptr));
-        cout << "El primer address es: "<< gc->adressList->at(0) << endl;
+        cout << "Se ha creado el nuevo VSPointer, &ptr = " << &ptr << endl;
+        cout << "Su valor inicial es, *ptr = "<< *ptr << endl;
+        cout << "Se ha agregado la direccion de memoria en el GC: "<< gc->adressList->at(0) << endl;
+        free(reinterpret_cast<void**>(&gc->adressList->at(0)));
+        cout << "Se ha limpiado la direccion de memoria en el GC: "<< gc->adressList->at(0) << endl;
     }
 
     // Destructor
     ~SmartPtr() { delete (ptr); }
 
     // Overloading dereferncing operator
-    T& operator*() { return *ptr; }
+    T& operator*() {
+        return *ptr;
+    }
 
     // Overloading arrow operator so that
     // members of T can be accessed
