@@ -9,15 +9,35 @@ class VSPtr{
 private:
     static T* ptr_data;
     int id;
+    int references;
 public:
     //Constructor
-    VSPtr(T* p = NULL);
+    VSPtr(T* p = NULL){
+        ptr_data = p;
+    }
     //Destructor
-    ~VSPtr();
-    T& operator*();
-    T* operator->();
-    T& operator=(const T& other);
-    static T New();
+    ~VSPtr(){
+        delete(ptr_data);
+    }
+    T& operator*(){
+        return *ptr_data;
+    }
+    T* operator->(){
+        return ptr_data;
+    }
+    T& operator= (const T& other){
+        if(typeid(this) == typeid(&other)){
+            return "Error: Invalid type for assignation";
+            //Must copy VSPtr and its id to Garbage Collector
+        }else{
+            return &other;
+        }
+
+    }
+    static T New(){
+        return *ptr_data;
+
+    }
 
 };
 
