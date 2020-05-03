@@ -3,12 +3,14 @@
 //
 #include "library.h"
 #include "iostream"
-#include "garbageCollector.h"
 
 int main()
 {
     SmartPtr<int> ptr(new int());
     *ptr = 20;
-    cout << *ptr;
+
+    cout << "&ptr = " << &ptr << endl;
+    cout << "*ptr = "<< *ptr << endl;
+
     return 0;
 }
