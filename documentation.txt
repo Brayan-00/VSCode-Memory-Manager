@@ -10,3 +10,4 @@ Historias de usuario
     Se debe crear una biblioteca que permita la creación un nuevo tipo de dato
     Este dato será denominado VSPtr<T>, tiene al menos un atributo T*
         Se instanciará: VSPtr<int> myPtr = VSPtr<int>::New();
+        
