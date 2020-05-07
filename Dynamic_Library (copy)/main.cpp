@@ -1,14 +1,19 @@
 //
 // Created by heutlett on 29/4/20.
 //
-#include "library.h"
+#include "VSPtr.h"
 #include "iostream"
-#include "garbageCollector.h"
 
 int main()
 {
-    SmartPtr<int> ptr(new int());
+    VSPtr<int> ptr = VSPtr<int>::New();
     *ptr = 20;
-    cout << *ptr;
+
+    //VSPtr<int> ptr2 = ptr;
+
+    cout << endl << "El valor de *ptr es " << *ptr << endl;
+    cout << "La direccion de memoria de &ptr es "<< &ptr << endl;
+    //cout << "La cantidad de referencias a ptr son " << garbageCollector::getInstance()->addressList->at(0)->count;
+
     return 0;
 }

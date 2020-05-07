@@ -1,19 +1,37 @@
 //
 // Created by heutlett on 29/4/20.
 //
-#include "library.h"
+#include "VSPointer.h"
 #include "iostream"
 
 int main()
 {
-    SmartPtr<int> ptr(new int());
+    garbageCollector * gc = garbageCollector::getInstance();
+
+    VSPointer<int> ptr(new int());
     *ptr = 20;
 
-    SmartPtr<int> ptr2 = ptr;
+    VSPointer<char> ptr1(new char());
+    *ptr1 = 'a';
 
-    cout << endl << "El valor de *ptr2 es " << *ptr2 << endl;
-    cout << "La direccion de memoria de &ptr2 es "<< &ptr2 << endl;
-    //cout << "La cantidad de referencias a ptr son " << garbageCollector::getInstance()->addressList->at(0)->count;
+    VSPointer<bool> ptr2(new bool());
+    *ptr2 = false;
+
+    cout << endl<< "copio referencia " << endl << endl;
+    VSPointer<int> ptr3(new int());
+    ptr3 = ptr;
+
+    VSPointer<int> ptr4(new int());
+    ptr4 = ptr3;
+
+
+    gc->printElements();
+
+    //VSPointer<int> ptr2 = ptr;
+
+    //cout << endl << "El valor de *ptr es " << *ptr << endl;
+    //cout << "La direccion de memoria de &ptr es "<< &ptr << endl;
+    //cout << "La cantidad de referencias a ptr son " << garbageCollector::getInstance()->garbageList->at(0)->count;
 
     return 0;
 }

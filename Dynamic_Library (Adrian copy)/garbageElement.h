@@ -5,25 +5,35 @@
 #ifndef DYNAMIC_LIBRARY_GARBAGEELEMENT_H
 #define DYNAMIC_LIBRARY_GARBAGEELEMENT_H
 
+#include <string>
+using namespace std;
+
 class garbageElement{
 
 public:
 
     void** address;
-    int count;
+    void** vsptrAdress;
+    int quantity = 1;
+    string id;
+    string type;
+    string value;
 
-    garbageElement(void ** newAddress){
+
+    garbageElement(void ** newAddress, string pType, string pId, void** pVsptrAdress){
 
         address = newAddress;
-        count = 0;
+
+        type = pType;
+
+        id = pId;
+
+        vsptrAdress = pVsptrAdress;
+
+        //cout << "Se ha creado el garbage element: " << newAddress << endl;
 
     }
 
-    void increaseCount(){
-
-        count++;
-
-    }
 
 };
 

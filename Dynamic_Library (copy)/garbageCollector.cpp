@@ -1,30 +1,21 @@
 //
-// Created by heutlett on 2/5/20.
+// Created by brayanrv on 3/5/20.
 //
-
 #include "garbageCollector.h"
-
-/* Null, because instance will be initialized on demand. */
 garbageCollector* garbageCollector::instance = 0;
 
-garbageCollector* garbageCollector::getInstance()
-{
-    if (instance == 0)
-    {
-        instance = new garbageCollector();
+garbageCollector* garbageCollector::getInstance(){
+    if (instance == 0){
+        static garbageCollector<T> instance;
+        return &instance;
     }
 
     return instance;
 }
 
-garbageCollector::garbageCollector()
-{
-
-    counter = 0;
-
+garbageCollector* garbageCollector::addElement(garbageElement) {
+    list.add(garbageElement);
 }
-void garbageCollector::increaseCounter() {
-
-    counter++;
-
+garbageCollector* garbageCollector::getLastId(){
+    return lastId;
 }
