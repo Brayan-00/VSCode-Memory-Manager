@@ -26,29 +26,6 @@ class garbageCollector {
 
         static garbageCollector* getInstance();
 
-        //Busca un puntero con la misma direccion en la lista, si lo encuentra devuelve su numero y lo aumenta
-        //si no lo encuentra devuelve 0;
-        /*
-        string createOrIncreaseQuantity(void** address){
-
-            for(int i = 0; i < garbageList->size(); i++){
-                cout << "comparando " << address << " " << garbageList->at(i)->address << " con id" << garbageList->at(i)->id <<  endl;
-                if(address == garbageList->at(i)->address){
-                    totalPtrCount++;
-                    garbageList->at(i)->quantity++;
-                    cout << "El id del retido es " << garbageList->at(i)->id << endl;
-
-                    return garbageList->at(i)->id;
-
-                }
-
-            }
-            totalPtrCount++;
-            return "";
-
-        }
-*/
-
         void increaseCounter() {
 
             totalPtrCount++;
@@ -57,13 +34,7 @@ class garbageCollector {
 
         void addPointer(void** address, string type, string pId, void ** vsptrAdress){
 
-            cout << "Se va agregar el address : " << address << endl;
-
-
-
             totalPtrCount++;
-
-            cout << "id es vacio" << endl;
 
             garbageList->push_back(new garbageElement(address, type, pId, vsptrAdress));
         }
@@ -74,8 +45,8 @@ class garbageCollector {
 
             for(int i = 0; i < garbageList->size(); i++){
 
-                cout << "id: " << garbageList->at(i)->id << " | VSPtrAdress: " << garbageList->at(i)->vsptrAdress << " | " << "refAddress: " << garbageList->at(i)->address << " | Type: " << garbageList->at(i)->type << " | Quantity: " << garbageList->at(i)->quantity << endl;
-                //cout << "value " << *reinterpret_cast<int*>(garbageList->at(i)->address) << endl;
+                cout << "id: " << garbageList->at(i)->id << " | VSPtrAdress: " << garbageList->at(i)->vsptrAdress << " | " << "refAddress: " << garbageList->at(i)->refAddress << " | Type: " << " | Value: " << garbageList->at(i)->value << garbageList->at(i)->type << " | Quantity: " << garbageList->at(i)->quantity << endl;
+                //cout << "value " << *reinterpret_cast<int*>(garbageList->at(i)->refAddress) << endl;
             }
 
         }

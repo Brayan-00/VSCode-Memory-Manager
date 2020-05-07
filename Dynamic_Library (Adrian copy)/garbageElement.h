@@ -12,7 +12,7 @@ class garbageElement{
 
 public:
 
-    void** address;
+    void** refAddress;
     void** vsptrAdress;
     int quantity = 1;
     string id;
@@ -22,7 +22,7 @@ public:
 
     garbageElement(void ** newAddress, string pType, string pId, void** pVsptrAdress){
 
-        address = newAddress;
+        refAddress = newAddress;
 
         type = pType;
 

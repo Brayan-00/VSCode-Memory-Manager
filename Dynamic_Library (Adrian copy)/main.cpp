@@ -17,7 +17,6 @@ int main()
     VSPointer<bool> ptr2(new bool());
     *ptr2 = false;
 
-    cout << endl<< "copio referencia " << endl << endl;
     VSPointer<int> ptr3(new int());
     ptr3 = ptr;
 

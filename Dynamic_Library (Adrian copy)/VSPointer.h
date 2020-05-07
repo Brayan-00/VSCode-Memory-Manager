@@ -21,12 +21,12 @@ public:
         string type = typeid(*ptr).name();
         string id = "id" + to_string(gc->totalPtrCount);
 
-        cout << "la direccion de ptr es " << ptr << " y la de this " << this << endl << endl;
+        //cout << "la direccion de ptr es " << ptr << " y la de this " << this << endl << endl;
 
-        cout << "VSPointer: " << &ptr << " type: (" << type << ") has been created" << endl;
+        cout << "VSPointer: " << this << " refTo: " << ptr <<" type: (" << type << ") has been created" << endl;
         gc->addPointer(reinterpret_cast<void**>(ptr), type, id, (void**)this);
 
-        //cout << "address is " << *reinterpret_cast<int*>(ptr) <<endl;
+        //cout << "refAddress is " << *reinterpret_cast<int*>(ptr) <<endl;
 
 
     }
@@ -38,6 +38,19 @@ public:
 
     // Overloading dereferncing operator
     T& operator*() {
+
+        cout << "el valor es " << *ptr << endl;
+
+        for(int i = 0; i < gc->garbageList->size(); i++){
+
+            if(gc->garbageList->at(i)->refAddress == reinterpret_cast<void**>(this->ptr)){
+
+                gc->garbageList->at(i)->value = to_string(*ptr);
+
+            }
+
+        }
+        cout << "damn" << endl;
         return *ptr;
     }
 
@@ -57,41 +70,31 @@ public:
     //Se ejecuta cuando se hace un ptr3 = ptr;
     VSPointer& operator=(VSPointer& other){
 
-
-        cout << "Other.ptr es " << reinterpret_cast<void**>(&other.ptr) << endl;
         ptr = other.ptr;
         string type = typeid(*ptr).name();
 
         for(int i = 0; i < gc->garbageList->size(); i++){
-            cout << "comparando " << reinterpret_cast<void**>(&ptr) << " " << gc->garbageList->at(i)->address << " con " << gc->garbageList->at(i)->id <<  endl;
-            if(reinterpret_cast<void**>(other.ptr) == gc->garbageList->at(i)->address){
-                //gc->totalPtrCount++;
+
+            //Busca el elemento en el garbageCollector para aumentar en uno su cantidad
+            if(reinterpret_cast<void**>(other.ptr) == gc->garbageList->at(i)->refAddress){
+
                 gc->garbageList->at(i)->quantity++;
 
-                cout << "i am this " << &this->ptr << endl;
-
+                //Busca el puntero nuevo para hacerlo apuntar al puntero ya creado y copiarle su id
                 for(int e = 0; e < gc->garbageList->size(); e++){
 
                     if(gc->garbageList->at(e)->vsptrAdress == reinterpret_cast<void**>(this)){
                         gc->garbageList->at(e)->id = gc->garbageList->at(i)->id;
-                        gc->garbageList->at(e)->address = gc->garbageList->at(i)->address;
+                        gc->garbageList->at(e)->refAddress = gc->garbageList->at(i)->refAddress;
+                        //cout << "el valor es " << *reinterpret_cast<int*>(gc->garbageList->at(e)) << endl;
                     }
 
                 }
-
-
-
-                cout << "El id del retido es " << gc->garbageList->at(i)->id << endl;
-
-                //gc->garbageList->push_back(new garbageElement(reinterpret_cast<void**>(&ptr), type, gc->garbageList->at(i)->id));
                 return *this;
             }
 
         }
-
-        //gc->addPointer(reinterpret_cast<void**>(&ptr), type);
         cout << "El valor de vspointer es " << to_string(*ptr) << endl;
-
     }
 
     void updateList(){
