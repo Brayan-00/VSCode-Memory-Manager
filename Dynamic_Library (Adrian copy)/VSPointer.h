@@ -37,10 +37,17 @@ public:
 
     // Destructor
     ~VSPointer() {
-        delete (ptr);
-        gc->deletePtr(id);
+        if(gc->getRefQuantity(id) == 0 && (!gc->isReferenced(ptr))) {
 
+            delete (ptr);
 
+        }
+
+        if(gc->deletePtr(id)){
+            cout << "The ptr: " << this << " id: " << id << " has successfully deleted"<< endl;
+        }else{
+            cout << "The ptr: " << this << " id: " << id << " has decreased one reference"<< endl;
+        }
     }
 
     // Overloading dereferncing operator
@@ -62,6 +69,17 @@ public:
     }
     //Se ejecuta cuando se hace un ptr3 = ptr;
     VSPointer& operator=(VSPointer& other){
+
+        string type = typeid(*ptr).name();
+        string type2 = typeid(*other).name();
+
+        if(type.compare(type2)==0){
+
+            ptr = other.ptr;
+            gc->updateReference(other.ptr, id);
+            gc->increaseReference(other.id);
+
+        }
 
     }
 

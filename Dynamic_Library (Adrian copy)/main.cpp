@@ -8,31 +8,20 @@ garbageCollector * gc = garbageCollector::getInstance();
 
 void deletingTest(){
 
-    VSPointer<int> ptr(new int());
-    *ptr = 666;
-    gc->printElements();
-
-}
-
-int main()
-{
-
-
-    /*
-     * Tipos de datos nativos
-     *
-     * int, bool, char, short, long, long long, float, double, long double
-     *
-     */
+    //VSPointer<int> ptr(new int());
+    //*ptr = 666;
+    //gc->printElements();
 
     VSPointer<int> ptr(new int());
     *ptr = 123;
 
-    int a = &ptr;
+    VSPointer<int> ptr9(new int());
 
-    cout << "El valor de a es :" << a << endl << endl;
+    ptr9 = ptr;
 
-    deletingTest();
+    VSPointer<int> ptr10(new int());
+
+    ptr10 = ptr9;
 
     VSPointer<bool> ptr1(new bool());
     *ptr1 = true;
@@ -57,6 +46,43 @@ int main()
 
     VSPointer<long double> ptr8(new long double());
     *ptr8 = 123213123.21312313232;
+
+    gc->printElements();
+}
+
+int main()
+{
+
+
+    /*
+     * Tipos de datos nativos
+     *
+     * int, bool, char, short, long, long long, float, double, long double
+     *
+     */
+
+    //TESTING
+
+    //VSPointer<int> ptr(new int());
+    //*ptr = 123;
+
+    //int a = &ptr;
+
+    //cout << "El valor de a es :" << a << endl << endl;
+
+    deletingTest();
+
+    VSPointer<int> ptr9(new int());
+
+    //ptr9 = ptr;
+
+    //*ptr = 666;
+
+    //cout << "El valor de ptr9 es " << &ptr9 << endl << endl;
+
+    //TESTING
+
+
 
     gc->printElements();
 

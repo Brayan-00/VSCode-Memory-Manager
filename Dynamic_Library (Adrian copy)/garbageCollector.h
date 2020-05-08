@@ -39,27 +39,64 @@ class garbageCollector {
 
         bool deletePtr(string id){
 
-            totalPtrCount--;
-
             for(int i = 0; i < garbageList->size(); i++){
-
                 if(garbageList->at(i)->id.compare(id)==0){
 
                     if(garbageList->at(i)->quantity == 0){
-
                         garbageList->erase(garbageList->begin() + i);
-
+                        totalPtrCount--;
+                        return true;
                     }else{
-
                         garbageList->at(i)->quantity--;
-
+                        return false;
                     }
+                }
+            }
+        }
+
+        garbageElement* getGarbageElement(string id){
+            for(int i = 0; i < garbageList->size(); i++){
+
+                if(garbageList->at(i)->id.compare(id) == 0){
+
+                    return garbageList->at(i);
+
+                }
+            }
+        }
+
+        void updateReference(void * ptr, string id){
+
+            getGarbageElement(id)->ptrData = ptr;
+
+        }
+
+        void increaseReference(string id){
+
+            getGarbageElement(id)->quantity++;
+
+        }
+
+        int getRefQuantity(string id) {
+
+            return getGarbageElement(id)->quantity;
+
+        }
+        //Busca en la lista de garbage element si existe un elemento con el puntero pasado por parametro
+        bool isReferenced(void * ptr){
+
+            for(int i = 0; i < garbageList->size(); i++){
+
+                if(garbageList->at(i)->ptrData == ptr){
+
+                    return true;
 
                 }
 
             }
-
+            return false;
         }
+
 
 };
 garbageCollector* garbageCollector::instance = 0;
