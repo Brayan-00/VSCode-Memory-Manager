@@ -8,29 +8,17 @@ int main()
 {
     garbageCollector * gc = garbageCollector::getInstance();
 
-    VSPointer<int> ptr(new int());
-    *ptr = 20;
 
-    VSPointer<char> ptr1(new char());
-    *ptr1 = 'a';
+    VSPointer<int> ptr(new int(222));
 
-    VSPointer<bool> ptr2(new bool());
-    *ptr2 = false;
+    VSPointer<bool> ptr1(new bool(true));
 
-    VSPointer<int> ptr3(new int());
-    ptr3 = ptr;
+    VSPointer<char> ptr2(new char('a'));
 
-    VSPointer<int> ptr4(new int());
-    ptr4 = ptr3;
+
 
 
     gc->printElements();
-
-    //VSPointer<int> ptr2 = ptr;
-
-    //cout << endl << "El valor de *ptr es " << *ptr << endl;
-    //cout << "La direccion de memoria de &ptr es "<< &ptr << endl;
-    //cout << "La cantidad de referencias a ptr son " << garbageCollector::getInstance()->garbageList->at(0)->count;
 
     return 0;
 }
