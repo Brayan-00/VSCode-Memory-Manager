@@ -34,6 +34,29 @@ class garbageCollector {
                 cout << "id: " << garbageList->at(i)->id << " | VSPtrAdress: " << garbageList->at(i)->vsptrAdress << " | " << "refAddress: " << garbageList->at(i)->getAddress() << " | Type: " << garbageList->at(i)->type << " | Value: " << garbageList->at(i)->getValue()  << " | Quantity: " << garbageList->at(i)->quantity << endl;
             }
         }
+
+        bool deletePtr(string id){
+
+            for(int i = 0; i < garbageList->size(); i++){
+
+                if(garbageList->at(i)->id.compare(id)==0){
+
+                    if(garbageList->at(i)->quantity == 0){
+
+                        garbageList->erase(garbageList->begin() + i);
+
+                    }else{
+
+                        garbageList->at(i)->quantity--;
+
+                    }
+
+                }
+
+            }
+
+        }
+
 };
 garbageCollector* garbageCollector::instance = 0;
 garbageCollector* garbageCollector::getInstance()

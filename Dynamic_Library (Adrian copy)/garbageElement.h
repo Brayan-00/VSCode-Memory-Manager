@@ -31,7 +31,7 @@ public:
         type = pType;
         id = pId;
         vsptrAdress = pVsptrAdress;
-        cout << "GarbageElement has been created, VSPointerAddress: " << vsptrAdress << ", Value: " << getValue() << ", refTo: " << ptrData << endl;
+        cout << "GarbageElement has been created, VSPointerAddress: " << vsptrAdress << ", Value: " << getValue() << ", refTo: " << ptrData << endl <<endl;
     }
     /**
      * Returns the value of the pointer in string

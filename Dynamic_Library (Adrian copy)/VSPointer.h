@@ -21,16 +21,21 @@ public:
         //cout << endl << "la direccion de memoria del valor de ptr es " << &(*ptr) << endl;
         //cout << "la direccion de memoria de ptr es " << ptr << endl;
         string type = typeid(*ptr).name();
-        string id = "id" + to_string(gc->totalPtrCount);
+        id = "id" + to_string(gc->totalPtrCount);
+        cout << "VSPointer: " << this << ", refTo: " << ptr <<" type: (" << type << "), Value: " << to_string(*ptr) << " has been created" << endl;
         gc->garbageList->push_back(new garbageElement(ptr, type, id, (void**)this));
         gc->totalPtrCount++;
-        cout << endl << "VSPointer: " << this << ", refTo: " << ptr <<" type: (" << type << "), Value: " << to_string(*ptr) << " has been created" << endl;
     }
 
     T operator &(){return *ptr;}
 
     // Destructor
-    ~VSPointer() { delete (ptr); }
+    ~VSPointer() {
+        delete (ptr);
+        gc->deletePtr(id);
+
+
+    }
 
     // Overloading dereferncing operator
     T& operator*() {

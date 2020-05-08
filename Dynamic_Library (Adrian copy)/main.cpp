@@ -4,6 +4,12 @@
 #include "VSPointer.h"
 #include "iostream"
 
+void deletingTest(){
+
+    VSPointer<int> ptr(new int(666));
+
+}
+
 int main()
 {
     garbageCollector * gc = garbageCollector::getInstance();
@@ -16,6 +22,10 @@ int main()
      */
 
     VSPointer<int> ptr(new int(222));
+
+
+    deletingTest();
+
 
     VSPointer<bool> ptr1(new bool(true));
 
@@ -32,9 +42,6 @@ int main()
     VSPointer<double> ptr7(new double(4123.22));
 
     VSPointer<long double> ptr8(new long double(123213123.21312313232));
-
-
-
 
     gc->printElements();
 
