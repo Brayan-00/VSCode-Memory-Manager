@@ -62,10 +62,7 @@ public:
     T* operator->() { return ptr; }
 
     VSPointer& operator=(T newValue){
-
-        ptr = newValue;
-        cout << "entre";
-
+        *ptr = newValue;
     }
     //Se ejecuta cuando se hace un ptr3 = ptr;
     VSPointer& operator=(VSPointer& other){

@@ -15,6 +15,8 @@ void deletingTest(){
     VSPointer<int> ptr(new int());
     *ptr = 123;
 
+    ptr = 5;
+
     VSPointer<int> ptr9(new int());
 
     ptr9 = ptr;
