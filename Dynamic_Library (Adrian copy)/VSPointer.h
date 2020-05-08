@@ -17,7 +17,7 @@ public:
 
     // Constructor
     explicit VSPointer(T* p) {
-        ptr = new T(*p);
+        ptr = p;
         //cout << endl << "la direccion de memoria del valor de ptr es " << &(*ptr) << endl;
         //cout << "la direccion de memoria de ptr es " << ptr << endl;
         string type = typeid(*ptr).name();

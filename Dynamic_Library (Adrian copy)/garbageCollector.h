@@ -33,6 +33,8 @@ class garbageCollector {
             for(int i = 0; i < garbageList->size(); i++){
                 cout << "id: " << garbageList->at(i)->id << " | VSPtrAdress: " << garbageList->at(i)->vsptrAdress << " | " << "refAddress: " << garbageList->at(i)->getAddress() << " | Type: " << garbageList->at(i)->type << " | Value: " << garbageList->at(i)->getValue()  << " | Quantity: " << garbageList->at(i)->quantity << endl;
             }
+
+            cout << endl;
         }
 
         bool deletePtr(string id){

@@ -4,15 +4,19 @@
 #include "VSPointer.h"
 #include "iostream"
 
+garbageCollector * gc = garbageCollector::getInstance();
+
 void deletingTest(){
 
     VSPointer<int> ptr(new int(666));
+
+    gc->printElements();
 
 }
 
 int main()
 {
-    garbageCollector * gc = garbageCollector::getInstance();
+
 
     /*
      * Tipos de datos nativos
@@ -21,27 +25,34 @@ int main()
      *
      */
 
-    VSPointer<int> ptr(new int(222));
-
+    VSPointer<int> ptr(new int());
+    *ptr = 123;
 
     deletingTest();
 
+    VSPointer<bool> ptr1(new bool());
+    *ptr1 = true;
 
-    VSPointer<bool> ptr1(new bool(true));
+    VSPointer<char> ptr2(new char());
+    *ptr2 = 'a';
 
-    VSPointer<char> ptr2(new char('a'));
+    VSPointer<short> ptr3(new short());
+    *ptr3 = 4;
 
-    VSPointer<short> ptr3(new short(4));
+    VSPointer<long> ptr4(new long());
+    *ptr4 = 12345678912345;
 
-    VSPointer<long> ptr4(new long(12345678912345));
+    VSPointer<long long> ptr5(new long long());
+    *ptr5 = 1234567890234567890;
 
-    VSPointer<long long> ptr5(new long long(1234567890234567890));
+    VSPointer<float> ptr6(new float());
+    *ptr6 = 213.22;
 
-    VSPointer<float> ptr6(new float(213.22));
+    VSPointer<double> ptr7(new double());
+    *ptr7 = 4123.22;
 
-    VSPointer<double> ptr7(new double(4123.22));
-
-    VSPointer<long double> ptr8(new long double(123213123.21312313232));
+    VSPointer<long double> ptr8(new long double());
+    *ptr8 = 123213123.21312313232;
 
     gc->printElements();
 
