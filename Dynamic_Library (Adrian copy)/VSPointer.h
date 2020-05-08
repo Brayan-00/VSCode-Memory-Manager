@@ -27,6 +27,12 @@ public:
         gc->totalPtrCount++;
     }
 
+    static VSPointer* New(T* p){
+
+        return VSPointer(p);
+
+    }
+
     T operator &(){return *ptr;}
 
     // Destructor

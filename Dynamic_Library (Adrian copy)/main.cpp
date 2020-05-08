@@ -8,8 +8,8 @@ garbageCollector * gc = garbageCollector::getInstance();
 
 void deletingTest(){
 
-    VSPointer<int> ptr(new int(666));
-
+    VSPointer<int> ptr(new int());
+    *ptr = 666;
     gc->printElements();
 
 }
@@ -27,6 +27,10 @@ int main()
 
     VSPointer<int> ptr(new int());
     *ptr = 123;
+
+    int a = &ptr;
+
+    cout << "El valor de a es :" << a << endl << endl;
 
     deletingTest();
 

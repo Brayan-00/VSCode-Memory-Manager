@@ -39,6 +39,8 @@ class garbageCollector {
 
         bool deletePtr(string id){
 
+            totalPtrCount--;
+
             for(int i = 0; i < garbageList->size(); i++){
 
                 if(garbageList->at(i)->id.compare(id)==0){
