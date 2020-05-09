@@ -97,6 +97,10 @@ class garbageCollector {
             return false;
         }
 
+        void updateId(string id, string newId){
+            getGarbageElement(id)->id = newId;
+        }
+
 
 };
 garbageCollector* garbageCollector::instance = 0;

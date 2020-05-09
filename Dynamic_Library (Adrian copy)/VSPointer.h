@@ -52,6 +52,7 @@ public:
 
     // Overloading dereferncing operator
     T& operator*() {
+        //gc->increaseReference(id);
         return *ptr;
     }
 
@@ -74,6 +75,7 @@ public:
 
             ptr = other.ptr;
             gc->updateReference(other.ptr, id);
+            //gc->updateId(id, other.id);
             gc->increaseReference(other.id);
 
         }
