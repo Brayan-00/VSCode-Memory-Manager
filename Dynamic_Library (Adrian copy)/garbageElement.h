@@ -15,7 +15,8 @@ public:
 
     void* ptrData;
     void* vsptrAdress;
-    int quantity = 0;
+    vector<garbageElement*> * listOfReferences = new vector<garbageElement*>;
+    //int quantity = 1;
     string id;
     string type;
 
@@ -68,12 +69,54 @@ public:
             return to_string(*static_cast<long double *>(ptrData));
         }
     }
+
+    void deleteReference(void ** address){
+
+        for(int i = 0; i < listOfReferences->size(); i++){
+
+            if(listOfReferences->at(i)->vsptrAdress == address){
+
+                listOfReferences->erase(listOfReferences->begin() + i);
+
+            }
+        }
+
+    }
+
+    garbageElement * getGarbageReference(void** address){
+
+        for(int i = 0; i < listOfReferences->size(); i++){
+
+            if(listOfReferences->at(i)->vsptrAdress == address){
+
+                return listOfReferences->at(i);
+
+            }
+        }
+
+    }
+
     /**
      * Return de memory address of the pointer
      * @return void**
      */
     void ** getAddress(){
         return static_cast<void **>(ptrData);
+    }
+
+    void toString(){
+
+        cout << "id: " << id << " | " << "refAddress: " << getAddress() << " | Type: " << type << " | Value: " << getValue()  << " | Quantity: " << listOfReferences->size()+1 << endl;
+
+        cout << 0 << ": " << vsptrAdress << endl;
+
+        for(int i = 0; i < listOfReferences->size(); i++){
+
+            cout << i+1 << ": " << listOfReferences->at(i)->vsptrAdress << endl;
+
+        }
+
+
     }
 };
 

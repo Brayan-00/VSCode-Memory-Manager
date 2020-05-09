@@ -14,12 +14,11 @@ public:
     T* ptr; // Actual pointer
     garbageCollector * gc = garbageCollector::getInstance();
     string id;
+    //void** idVsptr;
 
     // Constructor
     explicit VSPointer(T* p) {
         ptr = p;
-        //cout << endl << "la direccion de memoria del valor de ptr es " << &(*ptr) << endl;
-        //cout << "la direccion de memoria de ptr es " << ptr << endl;
         string type = typeid(*ptr).name();
         id = "id" + to_string(gc->totalPtrCount);
         cout << "VSPointer: " << this << ", refTo: " << ptr <<" type: (" << type << "), Value: " << to_string(*ptr) << " has been created" << endl;
@@ -37,17 +36,13 @@ public:
 
     // Destructor
     ~VSPointer() {
-        if(gc->getRefQuantity(id) == 0 && (!gc->isReferenced(ptr))) {
+        if(gc->deletePtr(id, reinterpret_cast<void**>(this))){
 
             delete (ptr);
 
         }
 
-        if(gc->deletePtr(id)){
-            cout << "The ptr: " << this << " id: " << id << " has successfully deleted"<< endl;
-        }else{
-            cout << "The ptr: " << this << " id: " << id << " has decreased one reference"<< endl;
-        }
+
     }
 
     // Overloading dereferncing operator
@@ -72,12 +67,9 @@ public:
         string type2 = typeid(*other).name();
 
         if(type.compare(type2)==0){
-
             ptr = other.ptr;
-            gc->updateReference(other.ptr, id);
-            //gc->updateId(id, other.id);
-            gc->increaseReference(other.id);
-
+            gc->updateReference(id, other.id, reinterpret_cast<void**>(this));
+            id = other.id;
         }
 
     }

@@ -31,16 +31,16 @@ class garbageCollector {
             cout << endl << "LIST OF VSPOINTERS" << endl;
 
             for(int i = 0; i < garbageList->size(); i++){
-                cout << "id: " << garbageList->at(i)->id << " | VSPtrAdress: " << garbageList->at(i)->vsptrAdress << " | " << "refAddress: " << garbageList->at(i)->getAddress() << " | Type: " << garbageList->at(i)->type << " | Value: " << garbageList->at(i)->getValue()  << " | Quantity: " << garbageList->at(i)->quantity << endl;
+                 garbageList->at(i)->toString();
             }
 
             cout << endl;
         }
-
-        bool deletePtr(string id){
+/*
+        bool deletePtr(string id, void** address){
 
             for(int i = 0; i < garbageList->size(); i++){
-                if(garbageList->at(i)->id.compare(id)==0){
+                if(garbageList->at(i)->id.compare(id)==0 && garbageList->at(i)->vsptrAdress==address){
 
                     if(garbageList->at(i)->quantity == 0){
                         garbageList->erase(garbageList->begin() + i);
@@ -52,55 +52,81 @@ class garbageCollector {
                     }
                 }
             }
-        }
+        }*/
 
         garbageElement* getGarbageElement(string id){
             for(int i = 0; i < garbageList->size(); i++){
 
                 if(garbageList->at(i)->id.compare(id) == 0){
-
                     return garbageList->at(i);
-
                 }
             }
+            return nullptr;
         }
 
-        void updateReference(void * ptr, string id){
-
-            getGarbageElement(id)->ptrData = ptr;
-
-        }
-
-        void increaseReference(string id){
-
-            getGarbageElement(id)->quantity++;
-
-        }
-
-        int getRefQuantity(string id) {
-
-            return getGarbageElement(id)->quantity;
-
-        }
-        //Busca en la lista de garbage element si existe un elemento con el puntero pasado por parametro
-        bool isReferenced(void * ptr){
-
+        garbageElement* getGarbageElement(string id, void** address){
             for(int i = 0; i < garbageList->size(); i++){
 
-                if(garbageList->at(i)->ptrData == ptr){
+                if(garbageList->at(i)->id.compare(id) == 0 && garbageList->at(i)->vsptrAdress == address){
+                    return garbageList->at(i);
+                }
+            }
+            return nullptr;
+        }
 
-                    return true;
+        void deleteGarbageElement(string id, void** address){
+            for(int i = 0; i < garbageList->size(); i++){
+
+                if(garbageList->at(i)->id.compare(id) == 0 && garbageList->at(i)->vsptrAdress == address){
+
+                    garbageList->erase(garbageList->begin() + i);
+                    totalPtrCount--;
 
                 }
+            }
+        }
+
+        void updateReference(string id, string newId, void** address){
+            garbageElement * gNewReference = getGarbageElement(id, address);
+
+            if(gNewReference== nullptr){
+
+                garbageElement * gOriginal = getGarbageElement(id);
+                garbageElement * gReference = gOriginal->getGarbageReference(address);
+                garbageElement * gNewOriginal = getGarbageElement(newId);
+                gOriginal->deleteReference(address);
+                gReference->id = newId;
+                gNewOriginal->listOfReferences->push_back(gReference);
+
+            }else{
+
+                deleteGarbageElement(id, address);
+                garbageElement * gOriginalReference = getGarbageElement(newId);
+                gNewReference->id = newId;
+                gOriginalReference->listOfReferences->push_back(gNewReference);
 
             }
-            return false;
         }
 
-        void updateId(string id, string newId){
-            getGarbageElement(id)->id = newId;
-        }
+        //Si es el ptr original devuelve true, sino false
+        bool deletePtr(string id, void ** address){
 
+            garbageElement * original = getGarbageElement(id, address);
+
+            if(original != nullptr){
+
+                deleteGarbageElement(id, address);
+                return true;
+
+            }else{
+
+                garbageElement * reference = getGarbageElement(id);
+                reference->deleteReference(address);
+                return false;
+
+            }
+
+        }
 
 };
 garbageCollector* garbageCollector::instance = 0;
