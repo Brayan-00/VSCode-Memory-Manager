@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "garbageElement.h"
-#include "list.h"
 
 using namespace std;
 
@@ -20,6 +19,7 @@ class garbageCollector {
     public:
 
         vector<garbageElement*> * garbageList = new vector<garbageElement*>;
+        vector<garbageElement*> * garbageTotalList = new vector<garbageElement*>;
 
         /* Static access method. */
         int totalPtrCount = 0;
@@ -28,7 +28,7 @@ class garbageCollector {
 
         void printElements(){
 
-            cout << endl << "LIST OF VSPOINTERS" << endl;
+            cout << "LIST OF VSPOINTERS" << endl;
 
             for(int i = 0; i < garbageList->size(); i++){
                  garbageList->at(i)->toString();
@@ -71,7 +71,7 @@ class garbageCollector {
         void updateReference(string id, string newId, void** address){
             garbageElement * gNewReference = getGarbageElement(id, address);
 
-            if(gNewReference== nullptr){
+            if(gNewReference == nullptr){
 
                 garbageElement * gOriginal = getGarbageElement(id);
                 garbageElement * gReference = gOriginal->getGarbageReference(address);
@@ -82,34 +82,37 @@ class garbageCollector {
 
             }else{
 
+                cout << "aqui" << endl;
+
                 deleteGarbageElement(id, address);
                 garbageElement * gOriginalReference = getGarbageElement(newId);
                 gNewReference->id = newId;
                 gOriginalReference->listOfReferences->push_back(gNewReference);
+
+                cout << "gOriginalReference:";
+                gOriginalReference->toString();
+                cout << endl;
+                cout << "gNewReference:";
+                gNewReference->toString();
 
             }
         }
 
         //Si es el ptr original devuelve true, sino false
         bool deletePtr(string id, void ** address){
-
             garbageElement * original = getGarbageElement(id, address);
-
             if(original != nullptr){
-
                 deleteGarbageElement(id, address);
                 return true;
 
             }else{
-
                 garbageElement * reference = getGarbageElement(id);
-                reference->deleteReference(address);
+                if(reference != nullptr){
+                    reference->deleteReference(address);
+                }
                 return false;
-
             }
-
         }
-
 };
 garbageCollector* garbageCollector::instance = 0;
 garbageCollector* garbageCollector::getInstance()
