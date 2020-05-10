@@ -9,9 +9,13 @@ using namespace std;
 template <class T>
 class VSPointer {
 
-public:
+private:
 
     T* ptr; // Actual pointer
+
+
+public:
+
     garbageCollector * gc = garbageCollector::getInstance();
     string id;
 /*
@@ -29,8 +33,12 @@ public:
 
     }
 */
-    // Constructor
+
     VSPointer() {
+
+    }
+    // Constructor
+    VSPointer(int i) {
         ptr = (typeof(*ptr)*)malloc(sizeof(*ptr));
         string type = typeid(*ptr).name();
         id = "id" + to_string(gc->totalPtrCount);
@@ -39,14 +47,9 @@ public:
         gc->totalPtrCount++;
     }
 
-    void* operator new(size_t){
+    static VSPointer New(){
 
-
-    }
-
-    static VSPointer<T>& New(){
-
-        return VSPointer();
+        return VSPointer(1);
 
     }
 
@@ -55,12 +58,8 @@ public:
     // Destructor
     ~VSPointer() {
         if(gc->deletePtr(id, reinterpret_cast<void**>(this))){
-
             delete (ptr);
-
         }
-
-
     }
 
     // Overloading dereferncing operator
@@ -88,7 +87,6 @@ public:
             id = other.id;
         }else{
             cout << "Operation fail, the types dont match" << endl;
-
         }
 
     }
