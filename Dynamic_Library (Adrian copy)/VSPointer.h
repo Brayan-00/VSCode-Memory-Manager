@@ -27,6 +27,7 @@ public:
         ptr = (typeof(*ptr)*)malloc(sizeof(*ptr));
         string type = typeid(*ptr).name();
         id = "id" + to_string(gc->totalPtrCount);
+        cout << "entre al constructor" << endl;
         //cout << "VSPointer: " << this << ", refTo: " << ptr <<" type: (" << type << "), Value: " << to_string(*ptr) << " has been created" << endl;
         gc->garbageList->push_back(new garbageElement(ptr, type, id, (void**)this));
         gc->totalPtrCount++;
@@ -80,8 +81,8 @@ public:
 
     VSPointer& operator=(VSPointer<T> other){
 
-        cout << "other data" << endl;
-        cout << "id: " << other.id << " ptr: " << *other.ptr << " is new: " << isNew << endl;
+        //cout << "other data" << endl;
+        //cout << "id: " << other.id << " ptr: " << *other.ptr << " is new: " << isNew << endl;
 
         string type = typeid(*ptr).name();
         string type2 = typeid(T).name();

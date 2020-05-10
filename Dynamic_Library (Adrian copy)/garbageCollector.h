@@ -68,6 +68,61 @@ class garbageCollector {
             }
         }
 
+    void updateReference(string id, string newId, void** address){
+        garbageElement * gNewReference = getGarbageElement(id, address);
+
+        if(gNewReference == nullptr){
+
+            cout << "si gNewReference == null" << endl;
+
+            garbageElement * gOriginal = getGarbageElement(id);
+            garbageElement * gReference = gOriginal->getGarbageReference(address);
+            garbageElement * gNewOriginal = getGarbageElement(newId);
+            gOriginal->deleteReference(address);
+            gReference->id = newId;
+            gNewOriginal->listOfReferences->push_back(gReference);
+
+            cout << "gOriginal:";
+            gOriginal->toString();
+            cout << "gReference:";
+            gReference->toString();
+            cout << "gNewOriginal:";
+            gNewOriginal->toString();
+
+
+        }else{
+
+            cout << "si gNewReference != null" << endl;
+
+            deleteGarbageElement(id, address);
+            garbageElement * gOriginalReference = getGarbageElement(newId);
+            gNewReference->id = newId;
+            gOriginalReference->listOfReferences->push_back(gNewReference);
+            transferReferences(gNewReference, newId, gOriginalReference);
+
+            //cout << "gOriginalReference:";
+            //gOriginalReference->toString();
+            //cout << endl;
+            //cout << "gNewReference:";
+            //gNewReference->toString();
+
+        }
+    }
+
+    void transferReferences(garbageElement * gOldElement, string newId, garbageElement * gNewElement){
+
+            while(gOldElement->listOfReferences->size() != 0){
+
+                garbageElement * gTemp = gOldElement->listOfReferences->at(0);
+                gTemp->id = newId;
+                gTemp->ptrData = gNewElement->ptrData;
+                gOldElement->listOfReferences->erase(gOldElement->listOfReferences->begin() + 0);
+                gNewElement->listOfReferences->push_back(gTemp);
+
+            }
+
+        }
+        /*
         void updateReference(string id, string newId, void** address){
             garbageElement * gNewReference = getGarbageElement(id, address);
 
@@ -89,14 +144,14 @@ class garbageCollector {
                 gNewReference->id = newId;
                 gOriginalReference->listOfReferences->push_back(gNewReference);
 
-                cout << "gOriginalReference:";
-                gOriginalReference->toString();
-                cout << endl;
-                cout << "gNewReference:";
-                gNewReference->toString();
+                //cout << "gOriginalReference:";
+                //gOriginalReference->toString();
+                //cout << endl;
+                //cout << "gNewReference:";
+                //gNewReference->toString();
 
             }
-        }
+        }*/
 
         //Si es el ptr original devuelve true, sino false
         bool deletePtr(string id, void ** address){

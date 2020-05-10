@@ -45,18 +45,34 @@ int main()
     //gc->printElements();
 
     if(true){
-        VSPointer<int> myPtr = VSPointer<int>::New();
-        *myPtr = 5;
+        VSPointer<int> myPtr = VSPointer<int>::New( );
+        *myPtr = 555;
 
-        VSPointer<int> myPtr1 = VSPointer<int>::New();
-        gc->printElements();
-
+        VSPointer<int> myPtr1 = VSPointer<int>::New( );
         myPtr1 = myPtr;
 
+        VSPointer<int> myPtr5 = VSPointer<int>::New( );
+        myPtr5 = myPtr;
+
+        VSPointer<int> myPtr6 = VSPointer<int>::New( );
+        myPtr6 = myPtr;
+
+        VSPointer<int> myPtr7 = VSPointer<int>::New( );
+        myPtr7 = myPtr6;
+
+        VSPointer<int> myPtr8 = VSPointer<int>::New( );
+        myPtr8 = myPtr5;
+
+        VSPointer<int> myPtr9 = VSPointer<int>::New( );
+        myPtr9 = myPtr7;
+
+
+        VSPointer<int> myPtr3 = VSPointer<int>::New( );
+        *myPtr3 = 1515;
+
         gc->printElements();
 
-        //myPtr = VSPointer<int>::New();
-
+        myPtr = myPtr3;
 
         gc->printElements();
 
