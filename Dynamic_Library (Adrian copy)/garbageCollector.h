@@ -36,24 +36,6 @@ class garbageCollector {
 
             cout << endl;
         }
-/*
-        bool deletePtr(string id, void** address){
-
-            for(int i = 0; i < garbageList->size(); i++){
-                if(garbageList->at(i)->id.compare(id)==0 && garbageList->at(i)->vsptrAdress==address){
-
-                    if(garbageList->at(i)->quantity == 0){
-                        garbageList->erase(garbageList->begin() + i);
-                        totalPtrCount--;
-                        return true;
-                    }else{
-                        garbageList->at(i)->quantity--;
-                        return false;
-                    }
-                }
-            }
-        }*/
-
         garbageElement* getGarbageElement(string id){
             for(int i = 0; i < garbageList->size(); i++){
 

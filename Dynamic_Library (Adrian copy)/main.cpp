@@ -10,22 +10,15 @@ garbageCollector * gc = garbageCollector::getInstance();
 int main()
 {
 
-    VSPointer<int> ptr(new int());
-    *ptr = 123;
+    VSPointer<int> ptr1 = VSPointer<int>();
+    *ptr1 = 5;
+    VSPointer<int> ptr2 = VSPointer<int>();
+    *ptr2 = 2;
 
-    VSPointer<int> ptr1(new int());
-    ptr1 = ptr;
-
-    VSPointer<int> ptr10(new int());
-    *ptr10 = 444;
-
-    VSPointer<int> ptr2(new int());
-    ptr2 = ptr1;
-
-    ptr2 = ptr10;
-
+    ptr1 = 5555;
 
     gc->printElements();
+
 
     return 0;
 }
