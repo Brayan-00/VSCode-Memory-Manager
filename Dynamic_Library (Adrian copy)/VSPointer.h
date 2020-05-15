@@ -25,9 +25,9 @@ public:
     // Constructor
     VSPointer(int i) {
         ptr = (typeof(*ptr)*)malloc(sizeof(*ptr));
+        gc->garbageTotalList->push_back(ptr);
         string type = typeid(*ptr).name();
         id = "id" + to_string(gc->totalPtrCount);
-        cout << "entre al constructor" << endl;
         //cout << "VSPointer: " << this << ", refTo: " << ptr <<" type: (" << type << "), Value: " << to_string(*ptr) << " has been created" << endl;
         gc->garbageList->push_back(new garbageElement(ptr, type, id, (void**)this));
         gc->totalPtrCount++;
@@ -42,7 +42,7 @@ public:
     // Destructor
     ~VSPointer() {
         if(gc->deletePtr(id, reinterpret_cast<void**>(this))){
-            delete (ptr);
+            free(ptr);
         }
     }
 
@@ -54,21 +54,6 @@ public:
 
     T* operator->() { return ptr; }
 
-    /*
-    VSPointer& operator=(VSPointer& other){
-
-        string type = typeid(ptr).name();
-        string type2 = typeid(other.ptr).name();
-
-        if(type.compare(type2)==0){
-            ptr = other.ptr;
-            gc->updateReference(id, other.id, reinterpret_cast<void**>(this));
-            id = other.id;
-        }else{
-            cout << "Operation fail, the types dont match" << endl;
-        }
-    }
-*/
     void validateType(string type, T newValue){
         string type2 = typeid(ptr).name();
         if(type.compare(type2) == 0){

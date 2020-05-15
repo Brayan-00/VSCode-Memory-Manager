@@ -2,9 +2,36 @@
 // Created by heutlett on 29/4/20.
 //
 #include "VSPointer.h"
+#include <iostream>
+
+using namespace std;
+/*
+void * procesoSeparado(void *data){
+
+    char *texto = (char *)data;
+    while(1){
+
+        cout << texto << endl;
+        sleep(4);
+
+    }
+
+}
+
+int main()
+{
+    pthread_t proceso1;
+    pthread_t proceso2;
+    pthread_create(&proceso1, NULL, &procesoSeparado, (void *) "hola");
+    pthread_create(&proceso2, NULL, &procesoSeparado, (void *) "adios");
+    pthread_join(proceso1, NULL);
+    pthread_join(proceso2, NULL);
+    cout << "aaaaa"<< endl;
+
+}
+*/
 
 garbageCollector * gc = garbageCollector::getInstance();
-
 void printTests(){
 
     //Test#1
@@ -38,47 +65,21 @@ void printTests(){
 int main()
 {
 
-    //printTests();
+    int i;
 
-    //Test#6
-    //cout << "Test #6:" << endl;
-    //gc->printElements();
+    VSPointer<int> myPtr = VSPointer<int>::New( );
+    *myPtr = 'A';
 
-    if(true){
-        VSPointer<int> myPtr = VSPointer<int>::New( );
-        *myPtr = 555;
-
-        VSPointer<int> myPtr1 = VSPointer<int>::New( );
-        myPtr1 = myPtr;
-
-        VSPointer<int> myPtr5 = VSPointer<int>::New( );
-        myPtr5 = myPtr;
-
-        VSPointer<int> myPtr6 = VSPointer<int>::New( );
-        myPtr6 = myPtr;
-
-        VSPointer<int> myPtr7 = VSPointer<int>::New( );
-        myPtr7 = myPtr6;
-
-        VSPointer<int> myPtr8 = VSPointer<int>::New( );
-        myPtr8 = myPtr5;
-
-        VSPointer<int> myPtr9 = VSPointer<int>::New( );
-        myPtr9 = myPtr7;
-
-
-        VSPointer<int> myPtr3 = VSPointer<int>::New( );
-        *myPtr3 = 1515;
-
-        gc->printElements();
-
-        myPtr = myPtr3;
-
-        gc->printElements();
-
-    }
+    VSPointer<int> myPtr1 = VSPointer<int>::New( );
+    *myPtr1 = 'b';
 
     gc->printElements();
-    //cout << "hola" << endl;
+
+    myPtr = myPtr1;
+
+    cin >> i;
+
+    gc->printElements();
+
     return 0;
 }
