@@ -3,7 +3,6 @@
 
 #include <vector>
 #include "garbageElement.h"
-//#include <pthread.h>
 #include <thread>
 #include <unistd.h>
 
