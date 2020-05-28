@@ -8,8 +8,8 @@ var ref = require('ref-napi');
 //var ffi = require('ffi');
 
 // Import math library
-/*
-const mathLibrary = new ffi.Library("./libVSPtr_DynamicLibrary", {
+
+const libVSPtr_DynamicLibrary = ffi.Library("/home/heutlett/VSCode-Memory-Manager/Extension_js_def/memory-management/libVSPtr_DynamicLibrary", {
     "Subtract": [
         "int", ["int", "int"]
     ],
@@ -20,7 +20,7 @@ const mathLibrary = new ffi.Library("./libVSPtr_DynamicLibrary", {
 	],
 	"get_md5_string": [ 'void', [ 'string' ] ]
 });
-*/
+
 //console.log(mathLibrary.getInfo(15));
 
 //var buffer = new Buffer(32); // allocate 32 bytes for the output data, an imaginary MD5 hex string.
