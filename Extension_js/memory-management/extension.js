@@ -8,6 +8,7 @@ var ref = require('ref-napi');
 //var ffi = require('ffi');
 
 // Import math library
+/*
 const mathLibrary = new ffi.Library("./libpruebaVS", {
     "Subtract": [
         "int", ["int", "int"]
@@ -19,14 +20,14 @@ const mathLibrary = new ffi.Library("./libpruebaVS", {
 	],
 	"get_md5_string": [ 'void', [ 'string' ] ]
 });
+*/
+//console.log(mathLibrary.getInfo(15));
 
-console.log(mathLibrary.getInfo(15));
+//var buffer = new Buffer(32); // allocate 32 bytes for the output data, an imaginary MD5 hex string.
+//mathLibrary.get_md5_string(buffer);
+//var actualString = ref.readCString(buffer, 0);
 
-var buffer = new Buffer(32); // allocate 32 bytes for the output data, an imaginary MD5 hex string.
-mathLibrary.get_md5_string(buffer);
-var actualString = ref.readCString(buffer, 0);
-
-console.log(actualString);
+//console.log(actualString);
 
 
 // this method is called when your extension is activated
