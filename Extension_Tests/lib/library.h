@@ -11,6 +11,7 @@ extern "C"
 {
 //Funciones que se llaman en JS
 int CountPeople();
+int recibo();
 };
 
 

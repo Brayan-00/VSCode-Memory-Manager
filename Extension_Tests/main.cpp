@@ -9,16 +9,24 @@ using namespace std;
 
 int main(){
 
-    cout << "Hola casa";
-    
+    int a;
      
-    std::cout << VSPTR_DYNAMICLIBRARY_LIBRARY_H::CountPeople() << std::endl;
+    std::cout << VSPTR_DYNAMICLIBRARY_LIBRARY_H::recibo() << std::endl;
     person *p1 = new person(1,2);
     person *p2 = new person(3,4);
-    std::cout << VSPTR_DYNAMICLIBRARY_LIBRARY_H::CountPeople() << std::endl;
+    person *p3 = new person(3,4);
+    person *p19 = new person(3,4);
+    person *p20 = new person(3,4);
+    person *p22 = new person(3,4);
+    person *p23 = new person(3,4);
+
+    std::cout << "Cantidad de personas: " << VSPTR_DYNAMICLIBRARY_LIBRARY_H::recibo() << std::endl;
+    cin >> a;
+    
+    
     delete(p1);
     delete(p2);
-    std::cout << VSPTR_DYNAMICLIBRARY_LIBRARY_H::CountPeople() << std::endl;
+    std::cout << VSPTR_DYNAMICLIBRARY_LIBRARY_H::recibo() << std::endl;
     //char arr[5] = { 'a', 'b', 'c', 'd', 'e' };
     //Array<char> a(arr, 5);
     //a.print();

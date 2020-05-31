@@ -13,7 +13,10 @@ var ref = require('ref-napi');
 const libVSPtr_DynamicLibrary = ffi.Library("/home/heutlett/VSCode-Memory-Manager/Extension_Tests/lib/libVSPtr_DynamicLibrary", {
     "CountPeople": [
         "int", []
-    ]
+	],
+	"recibo": [
+		"int", []
+	]
 });
 
 //console.log(libVSPtr_DynamicLibrary.getInfo(15));
@@ -75,14 +78,14 @@ function activate(context) {
 			//const cat = iteration++ % 2 ? 'Compiling Cat' : 'Coding Cat';
 			//panel.title = cat;
 			var number = Math.random();
-			panel.webview.html = getWebviewContent(libVSPtr_DynamicLibrary.CountPeople());
+			panel.webview.html = getWebviewContent(libVSPtr_DynamicLibrary.recibo());
 		  };
 	
 		  // Set initial content
 		  updateWebview();
 	
 		  // And schedule updates to the content every second
-		  setInterval(updateWebview, 5000);
+		  setInterval(updateWebview, 100);
 
 			
 			
@@ -91,6 +94,12 @@ function activate(context) {
 
 		})
 	  );
+
+}
+
+function foo(){
+
+	console.log('hola');
 
 }
 
@@ -135,7 +144,7 @@ function getWebviewContent(number) {
 
 		  	  function myFunction2(){
 
-					console.log('si');
+					
 
 				}
   
