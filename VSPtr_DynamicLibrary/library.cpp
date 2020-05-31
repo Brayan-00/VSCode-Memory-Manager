@@ -1,5 +1,20 @@
 #include "library.h"
 
+#include <iostream>
+#include "person.h"
+
+int CountPeople()
+{
+    return person::size;
+};
+
+
+
+
+
+/*
+#include "library.h"
+
 #include "person.h"
 
 int Subtract(int num1, int num2)
@@ -23,7 +38,7 @@ int get(int a){
 
 }
 
-
+*/
 /*
 int getInfo(int num)
 {

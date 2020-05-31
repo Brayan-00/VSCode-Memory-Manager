@@ -1,14 +1,25 @@
 //
 // Created by heutlett on 31/5/20.
 //
-
+#include "person.h"
 
 #ifndef VSPTR_DYNAMICLIBRARY_LIBRARY_H __attribute__((visibility("default")));
 #define VSPTR_DYNAMICLIBRARY_LIBRARY_H
 
-//#include "garbageCollector.h"
+
+extern "C"
+{
+//Funciones que se llaman en JS
+int CountPeople();
+};
 
 
+
+#endif //VSPTR_DYNAMICLIBRARY_LIBRARY_H
+
+
+
+/*
 extern "C"{
 
     int Subtract(int, int);
@@ -17,5 +28,4 @@ extern "C"{
     int get(int);
 
 }
-
-#endif //VSPTR_DYNAMICLIBRARY_LIBRARY_H
+*/

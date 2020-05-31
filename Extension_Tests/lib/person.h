@@ -7,14 +7,16 @@
 
 
 class VSPTR_DYNAMICLIBRARY_PERSON_H person {
+        public:
+        person(int id, int otherId);
+        ~person();
+        static int size;
 
-public:
-
-    static int a;
-    static int cambiar(int x);
-    static int getA();
-
+        private:
+        int id;
+        int otherId;
 };
+
 
 
 #endif //VSPTR_DYNAMICLIBRARY_PERSON_H

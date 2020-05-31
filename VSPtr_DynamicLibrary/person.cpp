@@ -2,17 +2,17 @@
 // Created by heutlett on 31/5/20.
 //
 
+#include <iostream>
 #include "person.h"
 
-int person::cambiar(int x){
+int person::size = 0;
 
-    a = x;
-    return 0;
-
-}
-
-int person::getA(){
-
-    return a;
-
+person::person(int id, int otherId)
+{
+    this->id = id;
+    this->otherId = otherId;
+    person::size++;
+};
+person::~person() {
+    person::size--;
 }

@@ -1,5 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+
 const vscode = require('vscode');
 
 var ffi = require("ffi-napi");
@@ -10,18 +11,9 @@ var ref = require('ref-napi');
 // Import math library
 
 const libVSPtr_DynamicLibrary = ffi.Library("/home/heutlett/VSCode-Memory-Manager/Extension_Tests/lib/libVSPtr_DynamicLibrary", {
-    "Subtract": [
-        "int", ["int", "int"]
-    ],
-    "Add": [
-        "int", ["int", "int"]
-	],
-	"cambia": [
-		"int", ["int"]
-	],
-	"get": [
-		"int", ["int"]
-	]
+    "CountPeople": [
+        "int", []
+    ]
 });
 
 //console.log(libVSPtr_DynamicLibrary.getInfo(15));
@@ -36,9 +28,14 @@ const libVSPtr_DynamicLibrary = ffi.Library("/home/heutlett/VSCode-Memory-Manage
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 
+
+
 /**
  * @param {vscode.ExtensionContext} context
  */
+
+
+
 function activate(context) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
@@ -73,14 +70,32 @@ function activate(context) {
 			} // Webview options. More on these later.
 		  );
 
-		  panel.webview.html = getWebviewContent();
+
+		  const updateWebview = () => {
+			//const cat = iteration++ % 2 ? 'Compiling Cat' : 'Coding Cat';
+			//panel.title = cat;
+			var number = Math.random();
+			panel.webview.html = getWebviewContent(libVSPtr_DynamicLibrary.CountPeople());
+		  };
+	
+		  // Set initial content
+		  updateWebview();
+	
+		  // And schedule updates to the content every second
+		  setInterval(updateWebview, 5000);
+
+			
+			
+
+			
 
 		})
 	  );
 
 }
 
-function getWebviewContent() {
+
+function getWebviewContent(number) {
 	return `<!DOCTYPE html>
   <html lang="en">
 	  <head>
@@ -105,7 +120,7 @@ function getWebviewContent() {
   
 		  <h2>Memory managment table</h2>
   
-		  <input type="button" value="Add" onclick="myFunction();"/>
+		  <input type="button" value=${number} onclick="myFunction2();"/>
   
 		  <table id="t01">
 		  <tr>
@@ -117,6 +132,12 @@ function getWebviewContent() {
 		  </table>
   
 		  <script>
+
+		  	  function myFunction2(){
+
+					console.log('si');
+
+				}
   
 			  function myFunction(){ 
   
