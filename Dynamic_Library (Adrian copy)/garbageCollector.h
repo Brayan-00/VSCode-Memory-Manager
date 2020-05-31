@@ -17,6 +17,8 @@ class garbageCollector {
         /* Private constructor to prevent instancing. */
         garbageCollector(){
 
+            garbageList = new vector<garbageElement*>();
+            garbageTotalList = new vector<void*>() ;
             thread(&garbageCollector::memoryLeakThread, this).detach();
 
         }
@@ -32,8 +34,8 @@ class garbageCollector {
 
     public:
 
-          vector<garbageElement*> * garbageList = new vector<garbageElement*>();
-          vector<void*> * garbageTotalList = new vector<void*>() ;
+          vector<garbageElement*> * garbageList;
+          vector<void*> * garbageTotalList;
 
 
         /* Static access method. */

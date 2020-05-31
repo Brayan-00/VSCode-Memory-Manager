@@ -127,8 +127,6 @@ public:
         validateType(typeid(&newValue).name(), newValue);
     }
 
-
-
 };
 
 #endif //PRUEBAVS_VSPOINTER_H
